@@ -2,6 +2,11 @@ import os
 import requests
 import pandas as pd
 
+
+
+current_folder = os.getcwd()
+print("Current execution folder:", current_folder)
+
 def get_user_projects(username):
     url = f"https://api.scratch.mit.edu/users/{username}/projects"
     response = requests.get(url)
@@ -48,7 +53,7 @@ def download_image(url, save_path):
         print(f"Error downloading image: {e}")
 
 def create_project_folder(project_id):
-    folder_name = f"{project_id}"
+    folder_name = f"Projects/{project_id}"
     url_file_name = f"{project_id}.url"
     
     # Create folder
@@ -90,15 +95,15 @@ for username in usernames:
             print(f"Views: {project['stats']['views']}")
             print(f"Loves: {project['stats']['loves']}")
             print(f"Favorites: {project['stats']['favorites']}")
-            if heavytask:
-                download_image(project['image'],f"{project['id']}.png")
-                download_image(project['image'],f"{project['id']}/{project['id']}.png")
-                export_data_to_json(project, f"{project['id']}/{project['id']}.json")
-            print()
             create_project_folder(project['id'])
+            if heavytask:
+                download_image(project['image'],f"Projects/{project['id']}.png")
+                download_image(project['image'],f"Projects/{project['id']}/{project['id']}.png")
+                export_data_to_json(project, f"Projects/{project['id']}/{project['id']}.json")
+            print()
             markdown+=f"## {project['id']}: {project['title']}  \n  \n"
             markdown+=f"{project['description']}  \n"
-            markdown+= f"[![{project['id']}]({project['id']}/{project['id']}.png)](https://scratch.mit.edu/projects/{project['id']})  \nhttps://scratch.mit.edu/projects/{project['id']}  \n"
+            markdown+= f"[![Projects/{project['id']}](Projects/{project['id']}/{project['id']}.png)](https://scratch.mit.edu/projects/{project['id']})  \nhttps://scratch.mit.edu/projects/{project['id']}  \n"
 
             
 create_text_file("Main.md", markdown)
