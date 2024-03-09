@@ -81,7 +81,7 @@ usernames = ["EloiStree", "jaimelesfrites2501", "eloiscratchstudents"]
 markdown+="# Scratch project automatic portfolio  \n  \n"
 markdown+="> Find here all the projects I have been working on until now.  \n"
 
-heavytask=True
+heavytask=False
 for username in usernames:
     projects = get_user_projects(username)
     if projects:
@@ -102,7 +102,9 @@ for username in usernames:
                 export_data_to_json(project, f"Projects/{project['id']}/{project['id']}.json")
             print()
             markdown+=f"## {project['id']}: {project['title']}  \n  \n"
-            markdown+=f"{project['description']}  \n"
+            markdown+=f"**Public:** {project['is_published']}  \n"
+            markdown+=f"**Description:**  \n{project['description']}  \n"
+            markdown+=f"**Instructions:**  \n{project['instructions']}  \n"
             markdown+= f"[![Projects/{project['id']}](Projects/{project['id']}/{project['id']}.png)](https://scratch.mit.edu/projects/{project['id']})  \nhttps://scratch.mit.edu/projects/{project['id']}  \n"
 
             
