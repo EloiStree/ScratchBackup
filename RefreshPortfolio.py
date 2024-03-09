@@ -106,4 +106,4 @@ for username in usernames:
             markdown+= f"[![Projects/{project['id']}](Projects/{project['id']}/{project['id']}.png)](https://scratch.mit.edu/projects/{project['id']})  \nhttps://scratch.mit.edu/projects/{project['id']}  \n"
 
             
-create_text_file("Main.md", markdown)
+create_text_file("README.md", markdown)
