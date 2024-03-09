@@ -103,8 +103,10 @@ for username in usernames:
             print()
             markdown+=f"## {project['id']}: {project['title']}  \n  \n"
             markdown+=f"**Public:** {project['is_published']}  \n"
-            markdown+=f"**Description:**  \n{project['description']}  \n"
-            markdown+=f"**Instructions:**  \n{project['instructions']}  \n"
+            if project['description'] and isinstance(project['description'], str):
+                markdown+=f"**Description:**  \n{project['description']}  \n"
+            if project['instructions'] and isinstance(project['instructions'], str):
+                markdown+=f"**Instructions:**  \n{project['instructions']}  \n"
             markdown+= f"[![Projects/{project['id']}](Projects/{project['id']}/{project['id']}.png)](https://scratch.mit.edu/projects/{project['id']})  \nhttps://scratch.mit.edu/projects/{project['id']}  \n"
 
             
